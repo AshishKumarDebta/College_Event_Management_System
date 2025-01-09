@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - College Event Management</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Ensuring body takes full height */
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1; /* Ensures main content takes up remaining space */
+        }
+    </style>
+</head>
+<body>
+    <!-- Include Header -->
+    <div th:insert="~{utility/header :: header}"></div>
+
+    <!-- Main Content -->
+    <main class="container my-4">
+        <h2 th:text="${event.id == null ? 'Create Event' : 'Edit Event'}"></h2>
+
+        <form th:action="@{${event.id == null ? '/events/create' : '/events/edit'}}" method="post">
+            <!-- Hidden input for event ID (for edit) -->
+            <input type="hidden" name="id" th:value="${event.id}">
+
+            <label for="eventName">Event Name:</label>
+            <input type="text" id="eventName" name="eventName" th:value="${event.eventName}" required><br><br>
+
+            <label for="eventDate">Event Date:</label>
+            <input type="date" id="eventDate" name="eventDate" th:value="${event.eventDate}" required><br><br>
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required th:text="${event.description}"></textarea><br><br>
+
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" th:value="${event.location}" required><br><br>
+
+            <button type="submit" th:text="${event.id == null ? 'Create Event' : 'Save Changes'}"></button>
+        </form>
+    </main>
+
+    <!-- Include Footer -->
+    <div th:insert="~{utility/footer :: footer}"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+    <script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

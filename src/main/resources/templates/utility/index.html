@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - College Event Management</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Ensuring body takes full height */
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        main {
+            flex: 1; /* Ensures main content takes up remaining space */
+        }
+    </style>
+</head>
+<body>
+    <!-- Include Header -->
+    <div th:insert="~{utility/header :: header}"></div>
+
+    <!-- Main Content -->
+    <main class="container my-4">
+        <h1>Welcome to the College Event Management System</h1>
+        <p>Organize and participate in college events effortlessly!</p>
+        <a th:href="@{/login}">Login</a> |
+        <a th:href="@{/student/register}">Register</a>
+    </main>
+
+    <!-- Include Footer -->
+    <div th:insert="~{utility/footer :: footer}"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

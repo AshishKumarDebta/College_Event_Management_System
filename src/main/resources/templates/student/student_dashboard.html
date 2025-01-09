@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home - College Event Management</title>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+/* Ensuring body takes full height */
+body {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+main {
+	flex: 1; /* Ensures main content takes up remaining space */
+}
+</style>
+</head>
+<body>
+	<!-- Include Header -->
+	<div th:insert="~{utility/header :: header}"></div>
+
+	<!-- Main Content -->
+	<main class="container my-4">
+		<h1>
+			Welcome, <span th:text="${currentStudent.name}"></span>!
+		</h1>
+		<!-- Add Event Form -->
+		<h2>Add a New Event</h2>
+		<form th:action="@{/student/add-event}" th:object="${participant}"
+			method="post">
+			<label for="eventId">Select Event:</label> <select id="eventId"
+				th:field="*{eventId}">
+				<option value="" disabled selected>Select an event</option>
+				<option th:each="event : ${events}" th:value="${event.id}"
+					th:text="|${event.eventName} (${event.formattedDate})|"></option>
+			</select>
+			<button type="submit" class="btn btn-primary mt-3">Add Event</button>
+		</form>
+		
+		<br/>
+
+		<h2>Your Participations:</h2>
+		<table border="1" class="table table-striped">
+			<thead>
+				<tr>
+					<th>Event ID</th>
+					<th>Event Name</th>
+					<th>Event Date</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="participation : ${participations}">
+					<td th:text="${participation.eventId}"></td>
+					<td th:text="${eventDetails[participation.eventId]?.eventName}"></td>
+					<td th:text="${eventDetails[participation.eventId]?.eventDate}"></td>
+					<td><a th:href="@{/student/delete/{id}(id=${participation.id})}"><button class="btn btn-info">Delete</button></a></td>
+				</tr>
+			</tbody>
+		</table>
+
+
+	</main>
+
+	<!-- Include Footer -->
+	<div th:insert="~{utility/footer :: footer}"></div>
+
+	<!-- Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

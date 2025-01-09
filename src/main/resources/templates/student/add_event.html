@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Event - College Event Management</title>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+/* Ensuring body takes full height */
+body {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+main {
+	flex: 1; /* Ensures main content takes up remaining space */
+}
+</style>
+</head>
+<body>
+	<!-- Include Header -->
+	<div th:insert="~{utility/header :: header}"></div>
+
+	<!-- Main Content -->
+	<main class="container my-4">
+		<h1>Add Event</h1>
+		<form th:action="@{/student/add-event}" th:object="${participant}"
+			method="post">
+			<input type="hidden" name="studentId" th:value="${studentId}" /> <label
+				for="eventId">Select Event:</label> <select id="eventId"
+				th:field="*{eventId}">
+				<option value="" disabled selected>Select an event</option>
+				<option th:each="event : ${events}" th:value="${event.id}"
+					th:text="|${event.eventName} (${event.formattedDate})|"></option>
+
+
+
+			</select>
+
+			<button type="submit" class="btn btn-primary mt-3">Add Event</button>
+		</form>
+	</main>
+
+	<!-- Include Footer -->
+	<div th:insert="~{utility/footer :: footer}"></div>
+
+	<!-- Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
