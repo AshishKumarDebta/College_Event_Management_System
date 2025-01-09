@@ -6,36 +6,102 @@
     <title>Home - College Event Management</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* Ensuring body takes full height */
+        /* General Styles */
         body {
+            font-family: 'Poppins', sans-serif;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            background-color: #f8f9fa;
         }
+
         main {
-            flex: 1; /* Ensures main content takes up remaining space */
+            flex: 1;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #343a40;
+            font-weight: 600;
+        }
+
+        p {
+            color: #6c757d;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-custom {
+            padding: 0.5rem 1.5rem;
+            margin: 0 0.5rem;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .btn-login {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .btn-login:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-register {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .btn-register:hover {
+            background-color: #1e7e34;
+        }
+
+        /* Footer Styling */
+        footer {
+            background-color: #343a40;
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <!-- Include Header -->
-    <div th:insert="~{utility/header :: header}"></div>
+<!-- Include Header -->
+<div th:insert="~{utility/header :: header}"></div>
 
-    <!-- Main Content -->
-    <main class="container my-4">
-        <h1>Welcome to the College Event Management System</h1>
-        <p>Organize and participate in college events effortlessly!</p>
-        <a th:href="@{/login}">Login</a> |
-        <a th:href="@{/student/register}">Register</a>
-    </main>
+<!-- Main Content -->
+<main class="container my-4">
+    <h1>Welcome to the College Event Management System</h1>
+    <p>Organize and participate in college events effortlessly!</p>
+    <a th:href="@{/login}" class="btn btn-custom btn-login">Login</a>
+    <a th:href="@{/student/register}" class="btn btn-custom btn-register">Register</a>
+</main>
 
-    <!-- Include Footer -->
-    <div th:insert="~{utility/footer :: footer}"></div>
+<!-- Include Footer -->
+<div th:insert="~{utility/footer :: footer}"></div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Footer Placeholder (if not using Thymeleaf) -->
+<footer>
+    <p>&copy; 2025 College Event Management. All rights reserved. <a href="#">Privacy Policy</a></p>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
