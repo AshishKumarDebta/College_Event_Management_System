@@ -12,7 +12,6 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class ErrorController implements org.springframework.boot.web.servlet.error.ErrorController {
 
-    // Optional: You can log the error details here for debugging
     @GetMapping("/error")
     public String handleError(HttpServletRequest request, SessionStatus currentStatus, HttpSession session) {
         // You can retrieve the status code to know what kind of error occurred
