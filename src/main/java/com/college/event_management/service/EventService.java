@@ -53,8 +53,4 @@ public class EventService {
     public List<Event> getEventsSortedByNameDesc() {
         return eventRepository.findByOrderByEventNameDesc();
     }
-
-    public Page<Event> getAllEventsWithPagination(Pageable pageable) {
-        return eventRepository.findAll(pageable);
-    }
 }

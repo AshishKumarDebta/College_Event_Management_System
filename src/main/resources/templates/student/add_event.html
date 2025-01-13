@@ -1,57 +1,94 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Add Event - College Event Management</title>
-<!-- Bootstrap CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<style>
-/* Ensuring body takes full height */
-body {
-	min-height: 100vh;
-	display: flex;
-	flex-direction: column;
-}
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Add Event - College Event Management</title>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<style>
+		/* Ensuring body takes full height */
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: #f8f9fa;
+        }
 
-main {
-	flex: 1; /* Ensures main content takes up remaining space */
-}
-</style>
+        main {
+            flex: 1; /* Ensures main content takes up remaining space */
+            padding: 30px;
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container h1 {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        select, button {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            border: none;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+	</style>
 </head>
 <body>
-	<!-- Include Header -->
-	<div th:insert="~{utility/header :: header}"></div>
+<!-- Include Header -->
+<div th:insert="~{utility/header :: header}"></div>
 
-	<!-- Main Content -->
-	<main class="container my-4">
+<!-- Main Content -->
+<main class="container">
+	<div class="form-container">
 		<h1>Add Event</h1>
-		<form th:action="@{/student/add-event}" th:object="${participant}"
-			method="post">
-			<input type="hidden" name="studentId" th:value="${studentId}" /> <label
-				for="eventId">Select Event:</label> <select id="eventId"
-				th:field="*{eventId}">
-				<option value="" disabled selected>Select an event</option>
-				<option th:each="event : ${events}" th:value="${event.id}"
-					th:text="|${event.eventName} (${event.formattedDate})|"></option>
+		<form th:action="@{/student/add-event}" th:object="${participant}" method="post">
+			<input type="hidden" name="studentId" th:value="${studentId}" />
 
-
-
-			</select>
+			<div class="form-group">
+				<label for="eventId">Select Event:</label>
+				<select id="eventId" th:field="*{eventId}" class="form-control" required>
+					<option value="" disabled selected>Select an event</option>
+					<option th:each="event : ${events}" th:value="${event.id}"
+							th:text="|${event.eventName} (${event.formattedDate})|"></option>
+				</select>
+			</div>
 
 			<button type="submit" class="btn btn-primary mt-3">Add Event</button>
 		</form>
-	</main>
+	</div>
+</main>
 
-	<!-- Include Footer -->
-	<div th:insert="~{utility/footer :: footer}"></div>
+<!-- Include Footer -->
+<div th:insert="~{utility/footer :: footer}"></div>
 
-	<!-- Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

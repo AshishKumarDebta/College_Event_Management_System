@@ -34,3 +34,4 @@ build/
 
 ### Ignore Properties file for security reason###
 src/main/resources/application.properties
+Project_Design_Note.txt

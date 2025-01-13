@@ -1,54 +1,121 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Home - College Event Management</title>
-<!-- Bootstrap CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<style>
-/* Ensuring body takes full height */
-body {
-	min-height: 100vh;
-	display: flex;
-	flex-direction: column;
-}
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Login - College Event Management</title>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<style>
+		/* Ensuring body takes full height */
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: #f8f9fa;
+        }
 
-main {
-	flex: 1; /* Ensures main content takes up remaining space */
-}
-</style>
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        .login-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-container h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #343a40;
+        }
+
+        label {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            border-radius: 5px;
+            padding: 10px;
+            border: 1px solid #ced4da;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .register-link a {
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .register-link a:hover {
+            color: #0056b3;
+        }
+	</style>
 </head>
 <body>
-	<!-- Include Header -->
-	<div th:insert="~{utility/header :: header}"></div>
+<!-- Include Header -->
+<div th:insert="~{utility/header :: header}"></div>
 
-	<!-- Main Content -->
-	<main class="container my-4">
+<!-- Main Content -->
+<main class="container">
+	<div class="login-container">
 		<h1>Login</h1>
 		<form action="#" th:action="@{/login}" method="post">
-			<label for="username">Username:</label> <input type="text"
-				id="username" name="username" required><br>
-			<br> <label for="password">Password:</label> <input
-				type="password" id="password" name="password" required><br>
-			<br>
+			<div class="form-group">
+				<label for="username">Username:</label>
+				<input type="text" id="username" name="username" class="form-control" required>
+			</div>
+
+			<div class="form-group">
+				<label for="password">Password:</label>
+				<input type="password" id="password" name="password" class="form-control" required>
+			</div>
+
 			<button type="submit">Login</button>
 		</form>
-		<p>
-			Don't have an account? <a th:href="@{/student/register}">Register
-				here</a>
-		</p>
-	</main>
 
-	<!-- Include Footer -->
-	<div th:insert="~{utility/footer :: footer}"></div>
+		<div class="register-link">
+			<p>Don't have an account? <a th:href="@{/student/register}">Register here</a></p>
+		</div>
+	</div>
+</main>
 
-	<!-- Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Include Footer -->
+<div th:insert="~{utility/footer :: footer}"></div>
+
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

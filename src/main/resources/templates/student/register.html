@@ -1,56 +1,120 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Home - College Event Management</title>
-<!-- Bootstrap CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<style>
-/* Ensuring body takes full height */
-body {
-	min-height: 100vh;
-	display: flex;
-	flex-direction: column;
-}
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Home - College Event Management</title>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<style>
+		/* Ensuring body takes full height */
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: #f8f9fa;
+        }
 
-main {
-	flex: 1; /* Ensures main content takes up remaining space */
-}
-</style>
+        main {
+            flex: 1; /* Ensures main content takes up remaining space */
+            padding: 30px;
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container h2 {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"], input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-container p {
+            font-size: 14px;
+        }
+	</style>
 </head>
 <body>
-	<!-- Include Header -->
-	<div th:insert="~{utility/header :: header}"></div>
+<!-- Include Header -->
+<div th:insert="~{utility/header :: header}"></div>
 
-	<!-- Main Content -->
-	<main class="container my-4">
+<!-- Main Content -->
+<main class="container">
+	<div class="form-container">
 		<h2>Register</h2>
+
 		<form action="#" th:action="@{/student/register}" method="post">
-			<label for="name">Name:</label> <input type="text" id="name"
-				name="name" required><br>
-			<br> <label for="email">Email:</label> <input type="email"
-				id="email" name="email" required><br>
-			<br> <label for="password">Password:</label> <input
-				type="password" id="password" name="password" required><br>
-			<br> <label for="department">Department:</label> <input
-				type="text" id="department" name="department" required><br>
-			<br> <label for="year">Year:</label> <input type="text"
-				id="year" name="year" required><br>
-			<br>
+			<div class="form-group">
+				<label for="name">Name:</label>
+				<input type="text" id="name" name="name" required>
+			</div>
+
+			<div class="form-group">
+				<label for="email">Email:</label>
+				<input type="email" id="email" name="email" required>
+			</div>
+
+			<div class="form-group">
+				<label for="password">Password:</label>
+				<input type="password" id="password" name="password" required>
+			</div>
+
+			<div class="form-group">
+				<label for="department">Department:</label>
+				<input type="text" id="department" name="department" required>
+			</div>
+
+			<div class="form-group">
+				<label for="year">Year:</label>
+				<input type="text" id="year" name="year" required>
+			</div>
+
 			<button type="submit">Register</button>
 		</form>
-	</main>
+	</div>
+</main>
 
-	<!-- Include Footer -->
-	<div th:insert="~{utility/footer :: footer}"></div>
+<!-- Include Footer -->
+<div th:insert="~{utility/footer :: footer}"></div>
 
-	<!-- Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

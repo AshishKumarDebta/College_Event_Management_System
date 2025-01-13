@@ -61,4 +61,13 @@ public class HomeController {
         // Redirect to the login page after logout
         return "redirect:/login";
     }
+    @GetMapping("/about-us")
+    public String aboutUs(){
+        return "utility/about_us";
+    }
+
+    @GetMapping("/contact-us")
+    public String contactUs(){
+        return "utility/contact_us";
+    }
 }

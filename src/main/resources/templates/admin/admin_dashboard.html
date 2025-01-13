@@ -1,67 +1,86 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Home - College Event Management</title>
-<!-- Bootstrap CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<style>
-/* Ensuring body takes full height */
-body {
-	min-height: 100vh;
-	display: flex;
-	flex-direction: column;
-}
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Events List - College Event Management</title>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<style>
+		/* Full-height body and flexible layout */
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
 
-main {
-	flex: 1; /* Ensures main content takes up remaining space */
-}
-</style>
+        main {
+            flex: 1; /* Main content fills remaining space */
+            padding: 20px;
+        }
+
+        .table thead th {
+            background-color: #f8f9fa;
+        }
+
+        .actions a {
+            margin-right: 10px;
+            text-decoration: none;
+        }
+
+        .actions a:hover {
+            text-decoration: underline;
+        }
+	</style>
 </head>
 <body>
-	<!-- Include Header -->
-	<div th:insert="~{utility/header :: header}"></div>
+<!-- Header -->
+<div th:insert="~{utility/header :: header}"></div>
 
-	<!-- Main Content -->
-	<main class="container my-4">
-		<h2>Events List</h2>
-		<a th:href="@{/events/create}">Create Event</a>
-		<table>
-			<thead>
-				<tr>
-					<th>Event Name</th>
-					<th>Event Date</th>
-					<th>Description</th>
-					<th>Location</th>
-					<th>Organizer</th>
-					<th>Actions</th>
-				</tr>
+<!-- Main Content -->
+<main class="container my-4">
+	<div class="d-flex justify-content-between align-items-center mb-4">
+		<h2 class="mb-0">Events List</h2>
+		<a th:href="@{/events/create}" class="btn btn-primary">Create Event</a>
+	</div>
+
+	<div class="table-responsive">
+		<table class="table table-bordered table-striped">
+			<thead class="thead-dark">
+			<tr>
+				<th>Event Name</th>
+				<th>Event Date</th>
+				<th>Description</th>
+				<th>Location</th>
+				<th>Organizer</th>
+				<th>Actions</th>
+			</tr>
 			</thead>
 			<tbody>
-				<tr th:each="event : ${events}">
-					<td th:text="${event.eventName}"></td>
-					<td th:text="${event.eventDate}"></td>
-					<td th:text="${event.description}"></td>
-					<td th:text="${event.location}"></td>
-					<td th:text="${event.organizer}"></td>
-					<td><a th:href="@{/events/edit/{id}(id=${event.id})}">Edit</a>
-						| <a th:href="@{/events/delete/{id}(id=${event.id})}">Delete</a></td>
-				    <td><a th:href="@{/admin/participants/{id}(id=${event.id})}">View Participants</a></td>
-				</tr>
+			<tr th:each="event : ${events}">
+				<td th:text="${event.eventName}"></td>
+				<td th:text="${event.eventDate}"></td>
+				<td th:text="${event.description}"></td>
+				<td th:text="${event.location}"></td>
+				<td th:text="${event.organizer}"></td>
+				<td class="actions">
+					<a th:href="@{/events/edit/{id}(id=${event.id})}" class="btn btn-sm btn-warning">Edit</a>
+					<a th:href="@{/events/delete/{id}(id=${event.id})}" class="btn btn-sm btn-danger">Delete</a>
+					<a th:href="@{/admin/participants(id=${event.id})}" class="btn btn-sm btn-info">View Participants</a>
+
+				</td>
+			</tr>
 			</tbody>
 		</table>
-	</main>
+	</div>
+</main>
 
-	<!-- Include Footer -->
-	<div th:insert="~{utility/footer :: footer}"></div>
+<!-- Footer -->
+<div th:insert="~{utility/footer :: footer}"></div>
 
-	<!-- Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
