@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Participants</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    main {
+        flex: 1;
+        padding: 40px;
+    }
+
+    table {
+        margin-top: 20px;
+    }
+
+    th {
+        text-align: left;
+    }
+  </style>
+</head>
+<body>
+<!-- Include Header -->
+<div th:insert="~{utility/header :: header}"></div>
+
+<!-- Main Content -->
+<main class="container">
+  <h1>Select Event to View Participants</h1>
+
+  <!-- Event Selection Dropdown -->
+  <form th:action="@{/admin/participants}" method="get">
+    <div class="form-group">
+      <label for="eventSelect">Select Event:</label>
+      <select id="eventSelect" name="id" class="form-control" onchange="this.form.submit()">
+        <option value="" disabled selected>Select an event</option>
+        <option th:each="event : ${events}"
+                th:value="${event.id}"
+                th:selected="${event.id == selectedEventId}"
+                th:text="${event.eventName}">
+        </option>
+      </select>
+    </div>
+  </form>
+
+
+  <!-- Participants Table (only shows if an event is selected) -->
+  <div th:if="${not #lists.isEmpty(participants)}">
+    <h2>Participants of the Selected Event</h2>
+
+    <table class="table table-bordered table-striped">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Department</th>
+        <th>Year</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="student, iterStat : ${participants}">
+        <td th:text="${iterStat.count}"></td>
+        <td th:text="${student.name}"></td>
+        <td th:text="${student.email}"></td>
+        <td th:text="${student.department}"></td>
+        <td th:text="${student.year}"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div th:if="${#lists.isEmpty(participants)}">
+    <p>No participants available for the selected event.</p>
+  </div>
+
+
+  <a th:href="@{/events}" class="btn btn-primary mt-3">Back to Events</a>
+</main>
+
+<!-- Include Footer -->
+<div th:insert="~{utility/footer :: footer}"></div>
+
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

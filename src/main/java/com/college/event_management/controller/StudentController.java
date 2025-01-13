@@ -79,35 +79,11 @@ public class StudentController {
 
 		model.addAttribute("currentStudent", student);
 
-		// Fetch all participations and include event details
-		List<Participant> participations = participantService.getParticipationByStudentId(student.getId());
-		Set<Integer> set = new HashSet<>();
-		for(Participant participant: participations) {
-			set.add(participant.getEventId());
-		}
-		Map<Integer, Event> eventDetails = participations.stream()
-				.map(participation -> eventService.getEventById(participation.getEventId())).filter(Optional::isPresent)
-				.map(Optional::get).collect(Collectors.toMap(Event::getId, event -> event));
+		List<Event> availableEvents = participantService.findEventsNotParticipatedByStudentId(student.getId());
+		List<Event> participatedEvents = participantService.findEventsByStudentId(student.getId());
 
-		model.addAttribute("participations", participations);
-		model.addAttribute("eventDetails", eventDetails);
-
-		// Add participant for the add-event functionality
-		Participant participant = new Participant();
-		model.addAttribute("participant", participant);
-
-		// Add all available events for dropdown
-		List<Event> availableEvents = eventService.getAllEvents();
-		
-		Iterator<Event> iterator = availableEvents.iterator();
-        while (iterator.hasNext()) {
-            Event event = iterator.next();
-            if (set.contains(event.getId())) {
-                iterator.remove();
-            }
-        }
-		
-		model.addAttribute("events", availableEvents);
+		model.addAttribute("participatedEvents", participatedEvents);
+		model.addAttribute("availableEvents", availableEvents);
 
 		return "student/student_dashboard";
 	}
@@ -115,21 +91,28 @@ public class StudentController {
 	@PostMapping("/add-event")
 	public String showAddEventForm(@RequestParam Integer eventId, Model model, HttpSession session) {
 		Student student = (Student) session.getAttribute("student");
+		if (student == null) {
+			model.addAttribute("error", "Student not found");
+			return "redirect:/login";
+		}
 		
 		Participant participant = new Participant();
-		participant.setEventId(eventId);
-		participant.setStudentId(student.getId());
+		Optional<Event> optionalEvent = eventService.getEventById(eventId);
+		if(optionalEvent.isPresent()){
+			participant.setEvent(optionalEvent.get());
+		} else{
+			return "error/error-500";
+		}
+		participant.setStudent(student);
 		participantService.addParticipant(participant);
 		
 		return "redirect:/student/dashboard";
 	}
-	
-	@GetMapping("/delete/{id}")
-	public String deleteEvent(@PathVariable Integer id, Model model, HttpSession session) {
-	    
-	    // Perform the deletion
-	    participantService.deleteById(id);
-	    
-	    return "redirect:/student/dashboard";
+
+	@PostMapping("/delete/{id}")
+	public String deleteEvent(@PathVariable Integer id, HttpSession session) {
+		participantService.deleteByEventId(id);
+		return "redirect:/student/dashboard";
 	}
+
 }
