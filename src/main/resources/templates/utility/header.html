@@ -1,29 +1,46 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<div th:fragment="header">
-	<header class="bg-primary text-white py-3 w-100">
-		<div
-			class="container d-flex justify-content-between align-items-center">
-			<h1 class="h4">Indira Gandhi Institute Of Technology, Sarang</h1>
-			<nav>
-				<a class="text-white mx-2" th:href="@{/}">Home</a>
-				<span
-					th:if="${session.isStudent != null || session.isAdmin != null}">
-					<!-- If student or admin is logged in, show Logout --> <a
-					class="text-white mx-2" th:href="@{/logout}">Logout</a>
-				</span> <span
-					th:if="${session.isStudent == null && session.isAdmin == null}">
-					<!-- If neither is logged in, show Login --> <a
-					class="text-white mx-2" th:href="@{/login}">Login</a>
+<header class="py-3" style="background-color: #004c8c; color: white;" xmlns:th="http://www.w3.org/1999/xhtml">
+	<div class="container d-flex justify-content-between align-items-center">
+		<h2 class="font-weight-bold" style="color: #ffcc00;">EventVista</h2>
+		<nav>
+			<ul class="list-unstyled d-flex">
+				<li class="mx-3"><a th:href="@{/}" class="text-light" style="color: white;">Home</a></li>
+				<!-- Conditional Rendering for Login/Logout -->
+				<span th:if="${session.isStudent != null || session.isAdmin != null}">
+					<li class="mx-3"><a th:href="@{/logout}" class="text-light" style="color: white;">Logout</a></li>
 				</span>
+				<span th:if="${session.isStudent == null && session.isAdmin == null}">
+					<li class="mx-3"><a th:href="@{/login}" class="text-light" style="color: white;">Login</a></li>
+				</span>
+				<li class="mx-3"><a th:href="@{/about-us}" class="text-light" style="color: white;">About</a></li>
+				<li class="mx-3"><a th:href="@{/contact-us}" class="text-light" style="color: white;">Contact Us</a></li>
+			</ul>
+		</nav>
+	</div>
+</header>
 
+<style>
+	header {
+        background-color: #004c8c;
+        color: white;
+    }
 
-				<!-- Common navigation links (About, Contact Us) -->
-				<a class="text-white mx-2" th:href="@{/about-us}">About</a> <a
-					class="text-white mx-2" th:href="@{/contact-us}">Contact Us</a>
+    header h1, header h2 {
+        color: #ffcc00;
+    }
 
-			</nav>
-		</div>
-	</header>
-</div>
-</html>
+    header a {
+        color: white;
+        text-decoration: none;
+    }
+
+    header a:hover {
+        color: #ffcc00;
+    }
+
+    /* Optional: Adjust the header to be sticky if desired */
+    header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+</style>

@@ -26,16 +26,16 @@ public class HomeController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam String username, @RequestParam String password,
+    public String login(@RequestParam String email, @RequestParam String password,
                         RedirectAttributes redirectAttributes, Model model, HttpSession session) {
         // Check if login is for admin
-        if (username.equals("admin") && password.equals("IGIT@1982")) {
+        if (email.equals("admin@gmail.com") && password.equals("IGIT@1982")) {
             session.setAttribute("isAdmin", true);  // Store admin flag in session
             return "redirect:/admin/dashboard";
-        } 
+        }
         // Check if login is for student
-        else if (studentService.authenticateStudent(username, password)) {
-            Student currentStudent = studentService.getStudentByEmail(username);
+        else if (studentService.authenticateStudent(email, password)) {
+            Student currentStudent = studentService.getStudentByEmail(email);
             session.setAttribute("isStudent", true);
             session.setAttribute("student", currentStudent);  // Store student object in session
             return "redirect:/student/dashboard";

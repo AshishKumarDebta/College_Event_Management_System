@@ -52,7 +52,7 @@
 				<th>Event Date</th>
 				<th>Description</th>
 				<th>Location</th>
-				<th>Organizer</th>
+<!--				<th>Organizer</th>-->
 				<th>Actions</th>
 			</tr>
 			</thead>
@@ -62,7 +62,7 @@
 				<td th:text="${event.eventDate}"></td>
 				<td th:text="${event.description}"></td>
 				<td th:text="${event.location}"></td>
-				<td th:text="${event.organizer}"></td>
+<!--				<td th:text="${event.organizer}"></td>-->
 				<td class="actions">
 					<a th:href="@{/events/edit/{id}(id=${event.id})}" class="btn btn-sm btn-warning">Edit</a>
 					<a th:href="@{/events/delete/{id}(id=${event.id})}" class="btn btn-sm btn-danger">Delete</a>
